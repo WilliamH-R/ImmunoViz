@@ -21,7 +21,7 @@
 golem::fill_desc(
   pkg_name = "TCRSequenceShiny", # The Name of the package containing the App
   pkg_title = "TCRSequenceShiny", # The Title of the package containing the App
-  pkg_description = "Collection of functions to work with Single Cell Immuneprofiling data", # The Description of the package containing the App
+  pkg_description = "Collection of functions to work with Single Cell Immuneprofiling data.", # The Description of the package containing the App
   author_first_name = "William", # Your First Name
   author_last_name = "Hagedorn-Rasmussen", # Your Last Name
   author_email = "s194545@dtu.dk", # Your Email

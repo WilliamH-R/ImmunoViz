@@ -10,7 +10,13 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
     fluidPage(
-      h1("TCRSequenceShiny")
+      h1("TCRSequenceShiny"),
+      tabsetPanel(
+        tabPanel(title = "Data check",
+                 mod_summarise_data_ui("summarise_data_1")),
+        tabPanel(title = "Data exploration",
+                 "module2")
+      )
     )
   )
 }
