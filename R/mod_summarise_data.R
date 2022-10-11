@@ -12,12 +12,12 @@ mod_summarise_data_ui <- function(id){
   tagList(
     sidebarLayout(
       checkboxGroupInput(inputId = ns("summarise_by"),
-                         "Choose variables to group by:",
-                         c("Allele" = "allele",
-                           "Peptide" = "peptide",
-                           "Protein source" = "peptide_source")
+                         label = "Choose variables to group by:",
+                         choices = c("Allele" = "allele",
+                                     "Peptide" = "peptide",
+                                     "Protein source" = "peptide_source")
                          ),
-      mainPanel(dataTableOutput(outputId = ns("summarise_table"))))
+      mainPanel(tableOutput(outputId = ns("summarise_table"))))
 
   )
 }
@@ -25,15 +25,14 @@ mod_summarise_data_ui <- function(id){
 #' summarise_data Server Functions
 #'
 #' @noRd
-mod_summarise_data_server <- function(id){
+mod_summarise_data_server <- function(id, chosen_data_set){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    output$summarise_table <- renderDataTable(
-      tibble::as_tibble(TCRSequenceFunctions::data_donor_one) %>%
+    output$summarise_table <- renderTable(
+      chosen_data_set() %>%
         TCRSequenceFunctions::summarise_with_filter(input$summarise_by,
-                                                    identifier = barcode)
-    )
+                                                    identifier = barcode))
 
   })
 }

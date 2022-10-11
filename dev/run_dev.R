@@ -11,5 +11,9 @@ golem::detach_all_attached()
 # Document and reload your package
 golem::document_and_reload()
 
+# Run in Viewer or Window, comment one out
+#options(shiny.launch.browser = .rs.invokeShinyPaneViewer)
+options(shiny.launch.browser = .rs.invokeShinyWindowViewer)
+
 # Run the application
 run_app()

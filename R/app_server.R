@@ -8,5 +8,7 @@
 #' @noRd
 app_server <- function(input, output, session) {
   # Your application server logic
-  mod_summarise_data_server("summarise_data_1")
+  chosen_data_set <- mod_choose_data_set_server("choose_data_set_1")
+  mod_summarise_data_server("summarise_data_1",
+                            chosen_data_set = chosen_data_set)
 }

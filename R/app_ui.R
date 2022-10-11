@@ -8,14 +8,29 @@ app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
+
     # Your application UI logic
     fluidPage(
-      h1("TCRSequenceShiny"),
-      tabsetPanel(
-        tabPanel(title = "Data check",
-                 mod_summarise_data_ui("summarise_data_1")),
-        tabPanel(title = "Data exploration",
-                 "module2")
+
+      # App title
+      titlePanel("TCRSequenceShiny"),
+
+      #
+      sidebarLayout(
+        sidebarPanel(
+          title = "Choose data set",
+          mod_choose_data_set_ui("choose_data_set_1")
+        ),
+
+      mainPanel(
+        tabsetPanel(
+          tabPanel(title = "Data check",
+                   mod_summarise_data_ui("summarise_data_1")),
+          tabPanel(title = "Data exploration",
+                   "module2")
+          )
+        )
+
       )
     )
   )
