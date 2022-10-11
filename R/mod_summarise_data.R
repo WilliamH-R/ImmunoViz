@@ -30,8 +30,7 @@ mod_summarise_data_server <- function(id){
     ns <- session$ns
 
     output$summarise_table <- renderDataTable(
-      TCRSequenceFunctions::vdj_v1_hs_aggregated_donor1_binarized_matrix %>%
-        TCRSequenceFunctions::run_all_prep() %>%
+      tibble::as_tibble(TCRSequenceFunctions::data_donor_one) %>%
         TCRSequenceFunctions::summarise_with_filter(input$summarise_by,
                                                     identifier = barcode)
     )
