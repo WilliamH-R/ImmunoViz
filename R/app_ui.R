@@ -18,7 +18,7 @@ app_ui <- function(request) {
       #
       sidebarLayout(
         sidebarPanel(
-          title = "Choose data set",
+          title = "Choose data set and settings",
           mod_choose_data_set_ui("choose_data_set_1")
         ),
 
@@ -27,7 +27,7 @@ app_ui <- function(request) {
           tabPanel(title = "Data check",
                    mod_summarise_data_ui("summarise_data_1")),
           tabPanel(title = "Data exploration",
-                   "module2")
+                   mod_plot_relevant_binder_frequencies_ui("plot_relevant_binder_frequencies_1"))
           )
         )
 
