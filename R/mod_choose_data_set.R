@@ -42,8 +42,6 @@ mod_choose_data_set_server <- function(id){
           TCRSequenceFunctions::data_donor_four
         }
       )
-
-
 })
 }
 
