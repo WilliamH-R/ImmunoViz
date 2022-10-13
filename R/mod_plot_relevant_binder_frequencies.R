@@ -10,11 +10,7 @@
 mod_plot_relevant_binder_frequencies_ui <- function(id){
   ns <- NS(id)
   tagList(
-    verticalLayout(
-      "Object 1",
-      "Object 2",
-      "Object 3",
-      plotly::plotlyOutput(outputId = ns("frequency_plot"))
+    plotly::plotlyOutput(outputId = ns("frequency_plot")
     )
 
   )

@@ -33,13 +33,13 @@ mod_choose_data_set_server <- function(id){
     chosen_data_set <-
       reactive(
         if (input$data_set == "donor_one") {
-          return(TCRSequenceFunctions::data_donor_one)
+          TCRSequenceFunctions::data_donor_one
         } else if (input$data_set == "donor_two") {
-          return(TCRSequenceFunctions::vdj_v1_hs_aggregated_donor2_binarized_matrix)
+          TCRSequenceFunctions::data_donor_two
         } else if (input$data_set == "donor_three") {
-          return(TCRSequenceFunctions::vdj_v1_hs_aggregated_donor3_binarized_matrix)
+          TCRSequenceFunctions::data_donor_three
         } else if (input$data_set == "donor_four") {
-          return(TCRSequenceFunctions::vdj_v1_hs_aggregated_donor4_binarized_matrix)
+          TCRSequenceFunctions::data_donor_four
         }
       )
 

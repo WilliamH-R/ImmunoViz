@@ -18,9 +18,12 @@ app_ui <- function(request) {
       #
       sidebarLayout(
         sidebarPanel(
-          title = "Choose data set and settings",
-          mod_choose_data_set_ui("choose_data_set_1")
-        ),
+          verticalLayout(
+          title = h4("Choose data set and settings"),
+          mod_choose_data_set_ui("choose_data_set_1"),
+          mod_choose_thresholds_ui("choose_thresholds_1"),
+          "Object 3"
+          )),
 
       mainPanel(
         tabsetPanel(

@@ -9,6 +9,7 @@ Imports:
     config (>= 0.3.1),
     golem (>= 0.3.2),
     magrittr,
+    plotly,
     shiny (>= 1.7.1),
     TCRSequenceFunctions
 Encoding: UTF-8

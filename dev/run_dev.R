@@ -12,8 +12,14 @@ golem::detach_all_attached()
 golem::document_and_reload()
 
 # Run in Viewer or Window, comment one out
-options(shiny.launch.browser = .rs.invokeShinyPaneViewer)
-#options(shiny.launch.browser = .rs.invokeShinyWindowViewer)
+#options(shiny.launch.browser = .rs.invokeShinyPaneViewer)
+options(shiny.launch.browser = .rs.invokeShinyWindowViewer)
 
 # Run the application
 run_app()
+
+# Link to online app
+# https://williamhr.shinyapps.io/TCRSequenceShiny/
+
+# Link to pass objects between modules
+# https://jiwanheo.rbind.io/post/2022-02-06-pass-around-data-between-shiny-modules-with-r6/
