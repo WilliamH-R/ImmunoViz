@@ -22,7 +22,7 @@ app_ui <- function(request) {
           title = h4("Choose data set and settings"),
           mod_choose_data_set_ui("choose_data_set_1"),
           mod_choose_thresholds_ui("choose_thresholds_1"),
-          "Object 3"
+          mod_print_output_ui("print_output_1")
           )),
 
       mainPanel(

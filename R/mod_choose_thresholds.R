@@ -10,14 +10,25 @@
 mod_choose_thresholds_ui <- function(id){
   ns <- NS(id)
   tagList(
-    sliderInput(
-      inputId = ns("threshold"),
-      label = "Threshold for UMI-count",
-      min = 0,
-      max = 100,
-      value = 10,
-      step = 1
+    verticalLayout(
+      sliderInput(
+        inputId = ns("min_UMI_count"),
+        label = "Threshold for UMI-count",
+        min = 0,
+        max = 100,
+        value = 10,
+        step = 1
+      ),
+      sliderInput(
+        inputId = ns("non_specific_threshold"),
+        label = "Threshold for UMI-count of non-specific binders",
+        min = 0,
+        max = 50,
+        value = 5,
+        step = 1
+      )
     )
+
 
   )
 }
@@ -29,11 +40,17 @@ mod_choose_thresholds_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    threshold <-
-      reactive(
-        input$threshold
+    threshold <- reactive(
+        input$min_UMI_count
       )
-
+    return(threshold)
+    '
+    non_specific_threshold <- reactive(
+        input$non_specific_threshold
+      )
+    return(list(threshold = threshold,
+                non_specific_threshold = non_specific_threshold))
+    Virker nu, men vil gerne kunne outputte to ting på én gang'
   })
 }
 
