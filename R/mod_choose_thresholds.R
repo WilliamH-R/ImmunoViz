@@ -12,7 +12,7 @@ mod_choose_thresholds_ui <- function(id){
   tagList(
     verticalLayout(
       sliderInput(
-        inputId = ns("min_UMI_count"),
+        inputId = ns("UMI_count_min"),
         label = "Threshold for UMI-count",
         min = 0,
         max = 100,
@@ -20,13 +20,16 @@ mod_choose_thresholds_ui <- function(id){
         step = 1
       ),
       sliderInput(
-        inputId = ns("non_specific_threshold"),
+        inputId = ns("non_specific_UMI_count_min"),
         label = "Threshold for UMI-count of non-specific binders",
         min = 0,
         max = 50,
         value = 5,
         step = 1
-      )
+      ),
+      br(),
+      actionButton(ns("reset_sliders"),
+                   "Reset sliders to 10X-standard")
     )
 
 
@@ -40,17 +43,16 @@ mod_choose_thresholds_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    threshold <- reactive(
-        input$min_UMI_count
-      )
-    return(threshold)
-    '
-    non_specific_threshold <- reactive(
-        input$non_specific_threshold
-      )
-    return(list(threshold = threshold,
-                non_specific_threshold = non_specific_threshold))
-    Virker nu, men vil gerne kunne outputte to ting på én gang'
+    observeEvent(input$reset_sliders, {
+      updateSliderInput(session,"UMI_count_min",value = 10)
+      updateSliderInput(session,"non_specific_UMI_count_min",value = 5)
+    })
+
+    return_list <- list(UMI_count_min = reactive(input$UMI_count_min),
+                        non_specific_UMI_count_min = reactive(input$non_specific_UMI_count_min))
+    return(return_list)
+
+
   })
 }
 

@@ -9,6 +9,7 @@
 #' @importFrom shiny NS tagList
 mod_print_output_ui <- function(id){
   ns <- NS(id)
+
   tagList(
     textOutput(outputId = ns("variable_to_print"))
   )
@@ -17,12 +18,12 @@ mod_print_output_ui <- function(id){
 #' print_output Server Functions
 #'
 #' @noRd
-mod_print_output_server <- function(id, threshold){
+mod_print_output_server <- function(id, UMI_count_min, non_specific_UMI_count_min){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
     output$variable_to_print <- renderText({
-      threshold()
+      UMI_count_min()
     })
 
   })

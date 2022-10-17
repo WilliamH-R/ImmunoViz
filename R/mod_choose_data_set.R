@@ -26,7 +26,7 @@ mod_choose_data_set_ui <- function(id){
 #' choose_data_set Server Functions
 #'
 #' @noRd
-mod_choose_data_set_server <- function(id){
+mod_choose_data_set_server <- function(id, UMI_count_min, non_specific_UMI_count_min){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
@@ -39,7 +39,9 @@ mod_choose_data_set_server <- function(id){
         } else if (input$data_set == "donor_three") {
           TCRSequenceFunctions::data_donor_three
         } else if (input$data_set == "donor_four") {
-          TCRSequenceFunctions::data_donor_four
+          TCRSequenceFunctions::data_donor_four %>%
+            TCRSequenceFunctions::evaluate_binder(threshold = UMI_count_min(),
+                                                  non_specific_threshold = non_specific_UMI_count_min())
         }
       )
     return(chosen_data_set)
