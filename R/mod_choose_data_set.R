@@ -40,8 +40,8 @@ mod_choose_data_set_server <- function(id, UMI_count_min, non_specific_UMI_count
           TCRSequenceFunctions::data_donor_three
         } else if (input$data_set == "donor_four") {
           TCRSequenceFunctions::data_donor_four %>%
-            TCRSequenceFunctions::evaluate_binder(threshold = UMI_count_min(),
-                                                  non_specific_threshold = non_specific_UMI_count_min())
+            TCRSequenceFunctions::evaluate_binder(UMI_count_min = UMI_count_min(),
+                                                  non_specific_UMI_count_min = non_specific_UMI_count_min())
         }
       )
     return(chosen_data_set)

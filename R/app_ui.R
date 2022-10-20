@@ -27,11 +27,12 @@ app_ui <- function(request) {
       mainPanel(
         tabsetPanel(
           tabPanel(title = "Data check",
-                   h4("Check distributions of the loaded data set"),
+                   h3("Check distributions of the loaded data set"),
                    fluidRow(column(mod_alpha_beta_consistency_ui("alpha_beta_consistency_1"),
                                    width = 6),
                             column(mod_alpha_beta_distribution_ui("alpha_beta_distribution_1"),
                                    width = 6),
+                            h3("Show distribution of relevant binders grouped by user selection"),
                             column(mod_summarise_data_ui("summarise_data_1"),
                                    width = 12)
                             )
