@@ -29,7 +29,7 @@ mod_choose_thresholds_ui <- function(id){
       ),
       br(),
       actionButton(ns("reset_sliders"),
-                   "Reset sliders to 10X-standard")
+                   "Reset sliders to 10x-standard")
     )
 
 
