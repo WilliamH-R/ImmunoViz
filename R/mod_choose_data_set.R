@@ -32,14 +32,15 @@ mod_choose_data_set_server <- function(id, UMI_count_min, non_specific_UMI_count
 
     chosen_data_set <-
       reactive(
+
         if (input$data_set == "donor_one") {
-          TCRSequenceFunctions::data_donor_one
+          TCRSequenceFunctions::data_donor_one_tidy
         } else if (input$data_set == "donor_two") {
-          TCRSequenceFunctions::data_donor_two
+          TCRSequenceFunctions::data_donor_two_tidy
         } else if (input$data_set == "donor_three") {
-          TCRSequenceFunctions::data_donor_three
+          TCRSequenceFunctions::data_donor_three_tidy
         } else if (input$data_set == "donor_four") {
-          TCRSequenceFunctions::data_donor_four %>%
+          TCRSequenceFunctions::data_donor_four_tidy %>%
             TCRSequenceFunctions::evaluate_binder(UMI_count_min = UMI_count_min(),
                                                   non_specific_UMI_count_min = non_specific_UMI_count_min())
         }

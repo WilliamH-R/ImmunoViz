@@ -17,6 +17,9 @@
 ## Amend DESCRIPTION with dependencies read from package code parsing
 attachment::att_amend_desc()
 
+## Increase memory size
+rsconnect::configureApp("TCRSequenceShiny", size="large")
+
 ## Add modules ----
 ## Create a module infrastructure in R/
 golem::add_module(name = "alpha_beta_consistency", with_test = FALSE) # Name of the module
