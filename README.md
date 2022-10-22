@@ -12,8 +12,8 @@ Contains the Shiny framework around the functions for handling a large
 database of TCR sequences. The package containing the functions is
 called `TCRSequenceFunctions` and can be found
 [here](https://github.com/WilliamH-R/TCRSequenceFunctions). Information
-regarding the functions and available data sets is also located in the
-package.
+regarding the included functions and available data sets are also
+located in the package.
 
 The app is able to let the user freely pick between four data set at any
 time. Generally, there is one major difference between the data sets:
@@ -31,7 +31,7 @@ second tab is focused on exploration of the data.
 The Shiny App can be run directly from the terminal by:
 
 ``` r
-shiny::runGitHub(repo = "WilliamH-R/TCRSequenceShiny"")
+shiny::runGitHub(repo = "WilliamH-R/TCRSequenceShiny)
 ```
 
 Or downloaded from GitHub:
