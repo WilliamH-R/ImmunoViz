@@ -10,7 +10,16 @@
 mod_plot_relevant_binder_frequencies_ui <- function(id){
   ns <- NS(id)
   tagList(
-    plotly::plotlyOutput(outputId = ns("frequency_plot")
+    verticalLayout(
+      sliderInput(
+        inputId = ns("max_frequency"),
+        label = "Threshold for frequency",
+        min = 0,
+        max = 1,
+        value = 1,
+        step = 0.1
+      ),
+      plotly::plotlyOutput(outputId = ns("frequency_plot"))
     )
 
   )
@@ -25,7 +34,8 @@ mod_plot_relevant_binder_frequencies_server <- function(id, chosen_data_set){
 
     output$frequency_plot <- plotly::renderPlotly(
       chosen_data_set() %>%
-        TCRSequenceFunctions::relevant_binder_frequency_plot(identifier = barcode)
+        TCRSequenceFunctions::relevant_binder_frequency_plot(identifier = barcode,
+                                                             max_frequency = input$max_frequency)
     )
 
   })

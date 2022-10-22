@@ -39,6 +39,7 @@ app_ui <- function(request) {
                    ),
           tabPanel(title = "Data exploration",
                    br(),
+                   h3("Check binding events between pMHC and non-promiscuous TCR-sequences along with their frequencies"),
                    mod_plot_relevant_binder_frequencies_ui("plot_relevant_binder_frequencies_1"))
           )
         )
