@@ -19,9 +19,9 @@ app_ui <- function(request) {
       sidebarLayout(
         sidebarPanel(
           verticalLayout(
-          title = h4("Choose data set and settings"),
-          mod_choose_data_set_ui("choose_data_set_1"),
-          mod_choose_thresholds_ui("choose_thresholds_1")
+            title = h4("Choose data set and settings"),
+            mod_choose_data_set_ui("choose_data_set_1"),
+            mod_choose_thresholds_ui("choose_thresholds_1")
           )),
 
       mainPanel(
@@ -40,7 +40,13 @@ app_ui <- function(request) {
           tabPanel(title = "Data exploration",
                    br(),
                    h3("Check binding events between pMHC and non-promiscuous TCR-sequences along with their frequencies"),
-                   mod_plot_relevant_binder_frequencies_ui("plot_relevant_binder_frequencies_1"))
+                   mod_plot_relevant_binder_frequencies_ui("plot_relevant_binder_frequencies_1"),
+                   br(),
+                   h3("See the count of relevant binding events for each allele present"),
+                   mod_plot_count_pr_allele_ui("plot_count_pr_allele_1"),
+                   br(),
+                   h3("Prediction of missing allele type:"),
+                   mod_predict_allele_ui("predict_allele_1"))
           )
         )
 
