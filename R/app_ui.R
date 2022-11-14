@@ -44,9 +44,7 @@ app_ui <- function(request) {
                    br(),
                    h3("See the count of relevant binding events for each allele present"),
                    mod_plot_count_pr_allele_ui("plot_count_pr_allele_1"),
-                   br(),
-                   h3("Prediction of missing allele type:"),
-                   mod_predict_allele_ui("predict_allele_1"))
+                   br())
           )
         )
 
