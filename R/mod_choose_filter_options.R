@@ -7,7 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_choose_thresholds_ui <- function(id){
+mod_choose_filter_options_ui <- function(id){
   ns <- NS(id)
   tagList(
     verticalLayout(
@@ -39,7 +39,7 @@ mod_choose_thresholds_ui <- function(id){
 #' choose_thresholds Server Functions
 #'
 #' @noRd
-mod_choose_thresholds_server <- function(id){
+mod_choose_filter_options_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
