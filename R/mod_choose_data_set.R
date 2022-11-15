@@ -11,15 +11,13 @@ mod_choose_data_set_ui <- function(id){
   ns <- NS(id)
   tagList(
     verticalLayout(
-      selectInput(
-        inputId = ns("data_set"),
-        label = "Choose data set",
-        choices = c("First donor" = "donor_one",
-                    "Second donor" = "donor_two",
-                    "Third donor" = "donor_three",
-                    "Fourth donor" = "donor_four"),
-        selectize = FALSE,
-        size = 4
+      checkboxGroupInput(inputId = ns("data_sets"),
+                         label = "Choose data set(s):",
+                         choices = c("First donor" = "donor1",
+                                     "Second donor" = "donor2",
+                                     "Third donor" = "donor3",
+                                     "Fourth donor" = "donor4"),
+                         selected = "donor1"
       ),
       sliderInput(
         inputId = ns("UMI_count_min"),
@@ -58,18 +56,7 @@ mod_choose_data_set_server <- function(id){
 
     chosen_data_set <-
       reactive(
-
-        if (input$data_set == "donor_one") {
-          TCRSequenceFunctions::data_donor_one_tidy
-        } else if (input$data_set == "donor_two") {
-          TCRSequenceFunctions::data_donor_two_tidy
-        } else if (input$data_set == "donor_three") {
-          TCRSequenceFunctions::data_donor_three_tidy
-        } else if (input$data_set == "donor_four") {
-          TCRSequenceFunctions::data_donor_four_tidy %>%
-            TCRSequenceFunctions::evaluate_binder(UMI_count_min = UMI_count_min(),
-                                                  non_specific_UMI_count_min = non_specific_UMI_count_min())
-        }
+        data_combined_tidy %>% dplyr::filter(donor == input$data_sets)
       )
     return(chosen_data_set)
 })

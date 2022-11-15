@@ -11,7 +11,15 @@ mod_print_output_ui <- function(id){
   ns <- NS(id)
 
   tagList(
-    textOutput(outputId = ns("variable_to_print"))
+    checkboxGroupInput(inputId = ns("data_sets"),
+                       label = "Choose data set(s):",
+                       choices = c("First donor" = "donor_one",
+                                   "Second donor" = "donor_two",
+                                   "Third donor" = "donor_three",
+                                   "Fourth donor" = "donor_four"),
+                       selected = "donor_one"
+    ),
+    verbatimTextOutput(outputId = ns("variable_to_print"))
   )
 }
 
@@ -22,8 +30,8 @@ mod_print_output_server <- function(id, UMI_count_min, non_specific_UMI_count_mi
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    output$variable_to_print <- renderText({
-      UMI_count_min()
+    output$variable_to_print <- renderPrint({
+      input$data_sets
     })
 
   })
