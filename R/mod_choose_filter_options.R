@@ -1,4 +1,4 @@
-#' choose_thresholds UI Function
+#' choose_filter_options UI Function
 #'
 #' @description A shiny Module.
 #'
@@ -10,33 +10,11 @@
 mod_choose_filter_options_ui <- function(id){
   ns <- NS(id)
   tagList(
-    verticalLayout(
-      sliderInput(
-        inputId = ns("UMI_count_min"),
-        label = "Threshold for UMI-count",
-        min = 0,
-        max = 100,
-        value = 10,
-        step = 1
-      ),
-      sliderInput(
-        inputId = ns("non_specific_UMI_count_min"),
-        label = "Threshold for UMI-count of non-specific binders",
-        min = 0,
-        max = 50,
-        value = 5,
-        step = 1
-      ),
-      br(),
-      actionButton(ns("reset_sliders"),
-                   "Reset sliders to 10x-standard")
-    )
-
 
   )
 }
 
-#' choose_thresholds Server Functions
+#' choose_filter_options Server Functions
 #'
 #' @noRd
 mod_choose_filter_options_server <- function(id){
@@ -57,7 +35,7 @@ mod_choose_filter_options_server <- function(id){
 }
 
 ## To be copied in the UI
-# mod_choose_thresholds_ui("choose_thresholds_1")
+# mod_choose_filter_options_ui("choose_thresholds_1")
 
 ## To be copied in the server
-# mod_choose_thresholds_server("choose_thresholds_1")
+# mod_choose_filter_options_server("choose_thresholds_1")

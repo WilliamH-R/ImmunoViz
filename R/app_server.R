@@ -9,7 +9,7 @@
 app_server <- function(input, output, session) {
   # Your application server logic
 
-  filter_options <- mod_choose_filter_options_server("choose_filter_options_1")
+  #filter_options <- mod_choose_filter_options_server("choose_filter_options_1")
   chosen_data_set <- mod_choose_data_set_server("choose_data_set_1",
                                                 UMI_count_min = filter_options$UMI_count_min,
                                                 non_specific_UMI_count_min = filter_options$non_specific_UMI_count_min)

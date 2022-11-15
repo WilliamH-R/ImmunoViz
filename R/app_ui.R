@@ -20,8 +20,7 @@ app_ui <- function(request) {
         sidebarPanel(
           verticalLayout(
             title = h4("Choose data set and settings"),
-            mod_choose_data_set_ui("choose_data_set_1"),
-            mod_choose_filter_options_ui("choose_filter_options_1")
+            mod_choose_data_set_ui("choose_data_set_1")
           )),
 
       mainPanel(
