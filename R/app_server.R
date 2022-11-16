@@ -17,8 +17,8 @@ app_server <- function(input, output, session) {
                                               chosen_data_set = chosen_data_set)
   mod_alpha_beta_distribution_server("alpha_beta_distribution_1",
                                      chosen_data_set = chosen_data_set)
-  mod_alpha_beta_consistency_server("alpha_beta_consistency_1",
-                                    chosen_data_set = chosen_data_set)
+  mod_alpha_beta_distinctiveness_server("alpha_beta_distinctiveness_1",
+                                        chosen_data_set = chosen_data_set)
   mod_plot_count_pr_allele_server("plot_count_pr_allele_1",
                                   chosen_data_set = chosen_data_set)
   mod_print_output_server("print_output_1")

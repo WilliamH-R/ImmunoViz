@@ -20,15 +20,14 @@ app_ui <- function(request) {
         sidebarPanel(
           verticalLayout(
             title = h4("Choose data set and settings"),
-            mod_choose_data_set_ui("choose_data_set_1"),
-            mod_print_output_ui("print_output_1")
+            mod_choose_data_set_ui("choose_data_set_1")
           )),
 
       mainPanel(
         tabsetPanel(
           tabPanel(title = "Data check",
                    h3("Check distributions of the loaded data set"),
-                   mod_alpha_beta_consistency_ui("alpha_beta_consistency_1"),
+                   mod_alpha_beta_distinctiveness_ui("alpha_beta_distinctiveness_1"),
                    mod_alpha_beta_distribution_ui("alpha_beta_distribution_1"),
                    h3("Show distribution of relevant binders grouped by user selection"),
                    mod_summarise_data_ui("summarise_data_1")
