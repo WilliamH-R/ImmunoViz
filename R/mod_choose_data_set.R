@@ -63,7 +63,7 @@ mod_choose_data_set_server <- function(id){
 
     chosen_data_set <-
       reactive(
-      data_combined_tidy %>%
+      TCRSequenceFunctions::data_combined_tidy %>%
           dplyr::filter(donor == input$data_sets,
                         HLA_match == input$HLA_typings)
       )
