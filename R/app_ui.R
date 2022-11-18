@@ -20,7 +20,10 @@ app_ui <- function(request) {
         sidebarPanel(
           verticalLayout(
             title = h4("Choose data set and settings"),
-            mod_choose_data_set_ui("choose_data_set_1")
+            mod_choose_data_set_ui("choose_data_set_1"),
+            br(),
+            h4("Download data with applied filters"),
+            mod_download_ui("download_1")
           )),
 
       mainPanel(

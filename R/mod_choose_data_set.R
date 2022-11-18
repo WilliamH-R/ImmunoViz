@@ -18,7 +18,14 @@ mod_choose_data_set_ui <- function(id){
                                      "Third donor" = "donor3",
                                      "Fourth donor" = "donor4"),
                          selected = "donor1"
-      ),
+                         ),
+      checkboxGroupInput(inputId = ns("HLA_typings"),
+                         label = "Choose which HLA-typings to include:",
+                         choices = c("True matches" = "TRUE",
+                                     "Unknown matches" = "UNKNOWN",
+                                     "False matches" = "FALSE"),
+                         selected = c("TRUE", "UNKNOWN", "FALSE")
+                         ),
       sliderInput(
         inputId = ns("UMI_count_min"),
         label = "Threshold for UMI-count",
@@ -56,7 +63,9 @@ mod_choose_data_set_server <- function(id){
 
     chosen_data_set <-
       reactive(
-        data_combined_tidy %>% dplyr::filter(donor == input$data_sets)
+        TCRSequenceFunctions::data_combined_tidy %>%
+          dplyr::filter(donor == input$data_sets,
+                        HLA_match == input$HLA_typings)
       )
     return(chosen_data_set)
 })
