@@ -17,7 +17,8 @@ mod_summarise_data_ui <- function(id){
                                      "Peptide" = "peptide",
                                      "Protein source" = "peptide_source")
                          ),
-      mainPanel(tableOutput(outputId = ns("summarise_table"))))
+      mainPanel(tableOutput(outputId = ns("summarise_table")))
+      )
 
   )
 }
