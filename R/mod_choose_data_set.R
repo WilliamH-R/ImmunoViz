@@ -42,10 +42,9 @@ mod_filter_data_set_ui <- function(id){
         value = 5,
         step = 1
       ),
-      br(),
       actionButton(ns("reset_sliders"),
                    "Reset sliders to 10x-standard")
-    )
+      )
     )
 }
 

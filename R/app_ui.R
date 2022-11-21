@@ -21,7 +21,7 @@ app_ui <- function(request) {
           verticalLayout(
             title = h4("Choose data set and settings"),
             mod_filter_data_set_ui("filter_data_set_1"),
-            br(),
+            hr(),
             h4("Download data with the filters applied from above"),
             mod_download_ui("download_1")
           )),
@@ -29,25 +29,27 @@ app_ui <- function(request) {
       mainPanel(
         tabsetPanel(
           tabPanel(title = "Descriptive Statistics",
-                   h2("adding stuff")
+                   h3("Show distribution of relevant binders grouped by user
+                      selection to compare with and without filtering"),
+                   mod_summarise_data_ui("summarise_data_1")
                    ),
           tabPanel(title = "Data check",
                    h3("Check distributions of the loaded data set"),
                    mod_alpha_beta_distinctiveness_ui("alpha_beta_distinctiveness_1"),
+                   hr(),
                    mod_alpha_beta_distribution_ui("alpha_beta_distribution_1"),
-                   h3("Show distribution of relevant binders grouped by user selection"),
-                   mod_summarise_data_ui("summarise_data_1")
+                   hr(),
+                   mod_plot_count_pr_allele_ui("plot_count_pr_allele_1")
                    ),
           tabPanel(title = "Data exploration",
                    br(),
-                   h3("Check binding events between pMHC and non-promiscuous TCR-sequences along with their frequencies"),
-                   mod_plot_relevant_binder_frequencies_ui("plot_relevant_binder_frequencies_1"),
-                   br(),
-                   h3("See the count of relevant binding events for each allele present"),
-                   mod_plot_count_pr_allele_ui("plot_count_pr_allele_1"),
-                   br()),
+                   h3("Check binding events between pMHC and non-promiscuous
+                      TCR-sequences along with concordance and within-TCR barcode
+                      count"),
+                   mod_plot_relevant_binder_frequencies_ui("plot_relevant_binder_frequencies_1")
+                   ),
           tabPanel(title = "readme",
-                   h2("adding stuff")
+                   mod_readme_ui("readme_1")
                    )
           )
         )

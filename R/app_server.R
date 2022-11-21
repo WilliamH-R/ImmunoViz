@@ -25,4 +25,5 @@ app_server <- function(input, output, session) {
   mod_print_output_server("print_output_1")
   mod_download_server("download_1",
                       data_filtered = data_filtered)
+  mod_readme_server("readme_1")
 }
