@@ -13,7 +13,7 @@ mod_plot_relevant_binder_frequencies_ui <- function(id){
     verticalLayout(
       sliderInput(
         inputId = ns("max_frequency"),
-        label = "Threshold for frequency",
+        label = "Threshold for concordance",
         min = 0,
         max = 1,
         value = 1,
@@ -28,12 +28,12 @@ mod_plot_relevant_binder_frequencies_ui <- function(id){
 #' plot_relevant_binder_frequencies Server Functions
 #'
 #' @noRd
-mod_plot_relevant_binder_frequencies_server <- function(id, chosen_data_set){
+mod_plot_relevant_binder_frequencies_server <- function(id, data_filtered){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
     output$frequency_plot <- plotly::renderPlotly(
-      chosen_data_set() %>%
+      data_filtered() %>%
         TCRSequenceFunctions::relevant_binder_frequency_plot(identifier = barcode,
                                                              max_frequency = input$max_frequency)
     )

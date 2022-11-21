@@ -19,12 +19,12 @@ mod_plot_count_pr_allele_ui <- function(id){
 #' plot_count_pr_allele Server Functions
 #'
 #' @noRd
-mod_plot_count_pr_allele_server <- function(id, chosen_data_set){
+mod_plot_count_pr_allele_server <- function(id, data_filtered){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
     output$count_plot <- renderPlot(
-      chosen_data_set() %>%
+      data_filtered() %>%
         TCRSequenceFunctions::count_binding_pr_allele(),
       res = 125
     )

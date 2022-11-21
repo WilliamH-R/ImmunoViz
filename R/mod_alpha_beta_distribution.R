@@ -19,12 +19,12 @@ mod_alpha_beta_distribution_ui <- function(id){
 #' alpha_beta_distribution Server Functions
 #'
 #' @noRd
-mod_alpha_beta_distribution_server <- function(id, chosen_data_set){
+mod_alpha_beta_distribution_server <- function(id, data_filtered){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
     output$distribution_plot <- renderPlot(
-      chosen_data_set() %>%
+      data_filtered() %>%
         TCRSequenceFunctions::alpha_beta_pair_distribution(),
       res = 125
     )

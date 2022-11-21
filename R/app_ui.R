@@ -20,7 +20,7 @@ app_ui <- function(request) {
         sidebarPanel(
           verticalLayout(
             title = h4("Choose data set and settings"),
-            mod_choose_data_set_ui("choose_data_set_1"),
+            mod_filter_data_set_ui("filter_data_set_1"),
             br(),
             h4("Download data with the filters applied from above"),
             mod_download_ui("download_1")
@@ -28,6 +28,9 @@ app_ui <- function(request) {
 
       mainPanel(
         tabsetPanel(
+          tabPanel(title = "Descriptive Statistics",
+                   h2("adding stuff")
+                   ),
           tabPanel(title = "Data check",
                    h3("Check distributions of the loaded data set"),
                    mod_alpha_beta_distinctiveness_ui("alpha_beta_distinctiveness_1"),
@@ -42,7 +45,10 @@ app_ui <- function(request) {
                    br(),
                    h3("See the count of relevant binding events for each allele present"),
                    mod_plot_count_pr_allele_ui("plot_count_pr_allele_1"),
-                   br())
+                   br()),
+          tabPanel(title = "readme",
+                   h2("adding stuff")
+                   )
           )
         )
 

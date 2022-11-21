@@ -1,4 +1,4 @@
-#' choose_data_set UI Function
+#' filter_data_set UI Function
 #'
 #' @description A shiny Module.
 #'
@@ -7,7 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_choose_data_set_ui <- function(id){
+mod_filter_data_set_ui <- function(id){
   ns <- NS(id)
   tagList(
     verticalLayout(
@@ -49,30 +49,38 @@ mod_choose_data_set_ui <- function(id){
     )
 }
 
-#' choose_data_set Server Functions
+#' filter_data_set Server Functions
 #'
 #' @noRd
-mod_choose_data_set_server <- function(id){
+mod_filter_data_set_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
     observeEvent(input$reset_sliders, {
-      updateSliderInput(session,"UMI_count_min",value = 10)
-      updateSliderInput(session,"non_specific_UMI_count_min",value = 5)
+      updateSliderInput(session = session,
+                        label = "UMI_count_min",
+                        value = 10)
+      updateSliderInput(session = session,
+                        label = "non_specific_UMI_count_min",
+                        value = 5)
     })
 
-    chosen_data_set <-
-      reactive(
+    data_sets <- reactive(
+      input$data_sets
+    )
+
+    data_filtered <- reactive(
       TCRSequenceFunctions::data_combined_tidy %>%
-          dplyr::filter(donor == input$data_sets,
-                        HLA_match == input$HLA_typings)
+        dplyr::filter(donor %in% input$data_sets,
+                      HLA_match %in% input$HLA_typings)
       )
-    return(chosen_data_set)
+    return(list(data_filtered = data_filtered,
+                data_sets = data_sets))
 })
 }
 
 ## To be copied in the UI
-# mod_choose_data_set_ui("choose_data_set_1")
+# mod_filter_data_set_ui("filter_data_set_1")
 
 ## To be copied in the server
-# mod_choose_data_set_server("choose_data_set_1")
+# mod_filter_data_set_server("filter_data_set_1")

@@ -20,7 +20,7 @@ mod_download_ui <- function(id){
 #' download Server Functions
 #'
 #' @noRd
-mod_download_server <- function(id, chosen_data_set){
+mod_download_server <- function(id, data_filtered){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
@@ -29,7 +29,7 @@ mod_download_server <- function(id, chosen_data_set){
         paste('data-', Sys.Date(), '.csv', sep='')
       },
       content = function(file) {
-        write.csv(chosen_data_set(), file)
+        write.csv(data_filtered(), file)
       }
     )
 

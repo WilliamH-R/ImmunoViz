@@ -19,12 +19,12 @@ mod_alpha_beta_distinctiveness_ui <- function(id){
 #' alpha_beta_distinctiveness Server Functions
 #'
 #' @noRd
-mod_alpha_beta_distinctiveness_server <- function(id, chosen_data_set){
+mod_alpha_beta_distinctiveness_server <- function(id, data_filtered){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
     output$distinctiveness_plot <- renderPlot(
-      chosen_data_set() %>%
+      data_filtered() %>%
         TCRSequenceFunctions::alpha_beta_distinctiveness(),
       res = 125
     )
