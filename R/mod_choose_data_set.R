@@ -26,6 +26,10 @@ mod_filter_data_set_ui <- function(id){
                                      "False matches" = "FALSE"),
                          selected = c("TRUE", "UNKNOWN", "FALSE")
                          ),
+      checkboxGroupInput(inputId = ns("only_non_promiscuous_pairs"),
+                         label = "Should only non-promiscuous pairs be included?",
+                         choices = c("Yes" = TRUE)
+                         ),
       sliderInput(
         inputId = ns("UMI_count_min"),
         label = "Threshold for UMI-count",
@@ -33,7 +37,7 @@ mod_filter_data_set_ui <- function(id){
         max = 100,
         value = 10,
         step = 1
-      ),
+        ),
       sliderInput(
         inputId = ns("non_specific_UMI_count_min"),
         label = "Threshold for UMI-count of non-specific binders",
@@ -41,7 +45,7 @@ mod_filter_data_set_ui <- function(id){
         max = 50,
         value = 5,
         step = 1
-      ),
+        ),
       actionButton(ns("reset_sliders"),
                    "Reset sliders to 10x-standard")
       )
@@ -71,8 +75,10 @@ mod_filter_data_set_server <- function(id){
     data_filtered <- reactive(
       TCRSequenceFunctions::data_combined_tidy %>%
         dplyr::filter(donor %in% input$data_sets,
-                      HLA_match %in% input$HLA_typings)
+                      HLA_match %in% input$HLA_typings) %>%
+        {if ((length(input$only_non_promiscuous_pairs)) != 0) tidyr::drop_na(., non_promiscuous_pair) else .}
       )
+
     return(list(data_filtered = data_filtered,
                 data_sets = data_sets))
 })
