@@ -26,28 +26,33 @@ mod_filter_data_set_ui <- function(id){
                                      "False matches" = "FALSE"),
                          selected = c("TRUE", "UNKNOWN", "FALSE")
                          ),
-      checkboxGroupInput(inputId = ns("only_non_promiscuous_pairs"),
-                         label = "Should only non-promiscuous pairs be included?",
-                         choices = c("Yes" = TRUE)
+      checkboxGroupInput(inputId = "additional_filters",
+                         label = "Additional filters",
+                         choices = c("Include only non-promiscuous pairs" = "only_non_promiscuous",
+                                     "Remove unique TCR-pMHC matches" = "exclude_unique",
+                                     "Choose UMI-count thresholds" = "UMI_thresholds")
                          ),
-      sliderInput(
-        inputId = ns("UMI_count_min"),
-        label = "Threshold for UMI-count",
-        min = 0,
-        max = 100,
-        value = 10,
-        step = 1
-        ),
-      sliderInput(
-        inputId = ns("non_specific_UMI_count_min"),
-        label = "Threshold for UMI-count of non-specific binders",
-        min = 0,
-        max = 50,
-        value = 5,
-        step = 1
-        ),
-      actionButton(ns("reset_sliders"),
-                   "Reset sliders to 10x-standard")
+      conditionalPanel(
+        condition = "input.additional_filters.indexOf('UMI_thresholds') != -1",
+        sliderInput(
+          inputId = ns("UMI_count_min"),
+          label = "Threshold for UMI-count",
+          min = 0,
+          max = 100,
+          value = 10,
+          step = 1
+          ),
+        sliderInput(
+          inputId = ns("non_specific_UMI_count_min"),
+          label = "Threshold for UMI-count of non-specific binders",
+          min = 0,
+          max = 50,
+          value = 5,
+          step = 1
+          ),
+        actionButton(inputId = ns("reset_sliders"),
+                     label = "Reset sliders to 10x-standard")
+        )
       )
     )
 }
@@ -59,15 +64,6 @@ mod_filter_data_set_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    observeEvent(input$reset_sliders, {
-      updateSliderInput(session = session,
-                        label = "UMI_count_min",
-                        value = 10)
-      updateSliderInput(session = session,
-                        label = "non_specific_UMI_count_min",
-                        value = 5)
-    })
-
     data_sets <- reactive(
       input$data_sets
     )
@@ -76,8 +72,20 @@ mod_filter_data_set_server <- function(id){
       TCRSequenceFunctions::data_combined_tidy %>%
         dplyr::filter(donor %in% input$data_sets,
                       HLA_match %in% input$HLA_typings) %>%
-        {if ((length(input$only_non_promiscuous_pairs)) != 0) tidyr::drop_na(., non_promiscuous_pair) else .}
+        {if ("only_non_promiscuous" %in% input$additional_filters) tidyr::drop_na(., non_promiscuous_pair) else .} %>%
+        {if ("exclude_unique" %in% input$additional_filters) dplyr::filter(., unique_binder == FALSE) else .} %>%
+        {if ("UMI_thresholds" %in% input$additional_filters) TCRSequenceFunctions::evaluate_binder(., UMI_count_min = input$UMI_count_min,
+                                                                                                   non_specific_UMI_count_min = input$non_specific_UMI_count_min) else .}
       )
+
+    observeEvent(input$reset_sliders, {
+      updateSliderInput(session = session,
+                        inputId = "UMI_count_min",
+                        value = 10)
+      updateSliderInput(session = session,
+                        inputId = "non_specific_UMI_count_min",
+                        value = 5)
+    })
 
     return(list(data_filtered = data_filtered,
                 data_sets = data_sets))
