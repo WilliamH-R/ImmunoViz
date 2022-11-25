@@ -51,7 +51,10 @@ mod_filter_data_set_ui <- function(id){
           step = 1
           ),
         actionButton(inputId = ns("reset_sliders"),
-                     label = "Reset sliders to 10x-standard")
+                     label = "Reset sliders to 10x-standard"),
+        hr(),
+        actionButton(inputId = ns("update_data"),
+                     label = "Update data")
         )
       )
     )
