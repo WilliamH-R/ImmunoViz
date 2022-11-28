@@ -25,12 +25,35 @@ mod_download_server <- function(id, data_filtered){
     ns <- session$ns
 
     output$downloadData <- downloadHandler(
-      filename = function() {
-        paste('data-', Sys.Date(), '.csv', sep='')
+      filename = paste('TCRSequences-', Sys.Date(), '.zip', sep=''),
+      content = function(fname) {
+
+        data_filtered_name <- paste('data_filtered',
+                                    Sys.Date(),
+                                    '.csv',
+                                    sep = '')
+        meta_data_name <- paste('meta_data',
+                                Sys.Date(),
+                                '.csv',
+                                sep = '')
+
+        write.csv(data_filtered(),
+                  file = data_filtered_name,
+                  row.names=FALSE)
+        write.csv(tibble::tribble(~variable, ~value,
+                                  "Data sets", "A0201",
+                                  "HLA-typings", "asd",
+                                  "Min. UMI-count", "asd",
+                                  "Non-specific binder multiplier", "asd",
+                                  "Additional filters", "asd"),
+                  file = meta_data_name,
+                  row.names=FALSE)
+
+        zip(zipfile = fname,
+            files = c(data_filtered_name, meta_data_name))
+        browser()
       },
-      content = function(file) {
-        write.csv(data_filtered(), file)
-      }
+      contentType = "application/zip"
     )
 
   })
