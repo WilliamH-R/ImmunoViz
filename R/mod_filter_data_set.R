@@ -50,10 +50,10 @@ mod_filter_data_set_ui <- function(id){
           max = 50,
           value = 5,
           step = 1
-        ),
-        actionButton(inputId = ns("reset_sliders"),
-                     label = "Reset sliders to 10x-standard")
-        ),
+        )),
+      hr(),
+      actionButton(inputId = ns("reset_filters"),
+                   label = "Reset filters to 10x-standard"),
       hr(),
       actionButton(inputId = ns("update_data"),
                    label = "Update data")
@@ -70,31 +70,67 @@ mod_filter_data_set_server <- function(id){
 
     data_filtered <- eventReactive(input$update_data,
                                    ignoreNULL = FALSE, {
-      TCRSequenceFunctions::data_combined_tidy %>%
-        dplyr::filter(donor %in% input$data_sets,
-                      HLA_match %in% input$HLA_typings) %>%
-        {if ("only_non_promiscuous" %in% input$additional_filters) tidyr::drop_na(., non_promiscuous_pair) else .} %>%
-        {if ("exclude_unique" %in% input$additional_filters) dplyr::filter(., unique_binder == FALSE) else .} %>%
-        {if ("UMI_thresholds" %in% input$additional_filters) TCRSequenceFunctions::evaluate_binder(., UMI_count_min = input$UMI_count_min,
-                                                                                                   non_specific_UMI_count_min = input$non_specific_UMI_count_min) else .}
+
+                                     validate(
+                                       need(input$data_sets != "", "Please choose at least one donor"),
+                                       need(input$HLA_typings != "", "Please choose at least one type of HLA-status")
+                                     )
+
+                                     TCRSequenceFunctions::data_combined_tidy %>%
+                                       dplyr::filter(donor %in% input$data_sets,
+                                                     HLA_match %in% input$HLA_typings) %>%
+                                       {if ("only_non_promiscuous" %in% input$additional_filters) tidyr::drop_na(., non_promiscuous_pair) else .} %>%
+                                       {if ("exclude_unique" %in% input$additional_filters) dplyr::filter(., unique_binder == FALSE) else .} %>%
+                                       {if ("UMI_thresholds" %in% input$additional_filters) TCRSequenceFunctions::evaluate_binder(., UMI_count_min = input$UMI_count_min,
+                                                                                                                                  non_specific_UMI_count_min = input$non_specific_UMI_count_min) else .}
     })
 
     data_sets <- eventReactive(input$update_data,
                                ignoreNULL = FALSE, {
-      input$data_sets
-    })
+                                 input$data_sets
+                                 })
 
-    observeEvent(input$reset_sliders, {
-      updateSliderInput(session = session,
-                        inputId = "UMI_count_min",
+    HLA_typings <- eventReactive(input$update_data,
+                                 ignoreNULL = FALSE, {
+                                   input$HLA_typings
+                                   })
+
+    additional_filters <- eventReactive(input$update_data,
+                                        ignoreNULL = FALSE, {
+                                          input$additional_filters
+                                          })
+
+    UMI_count_min <- eventReactive(input$update_data,
+                                   ignoreNULL = FALSE, {
+                                     input$UMI_count_min
+                                     })
+
+    non_specific_UMI_count_min <- eventReactive(input$update_data,
+                                                ignoreNULL = FALSE, {
+                                                  input$non_specific_UMI_count_min
+                                                  })
+
+    observeEvent(input$reset_filters, {
+      updateSliderInput(inputId = "UMI_count_min",
                         value = 10)
-      updateSliderInput(session = session,
-                        inputId = "non_specific_UMI_count_min",
+      updateSliderInput(inputId = "non_specific_UMI_count_min",
                         value = 5)
+      updateCheckboxGroupInput(inputId = "data_sets",
+                               selected = c("donor1", "donor2",
+                                            "donor3", "donor4"))
+      updateCheckboxGroupInput(inputId = "HLA_typings",
+                               selected = c("TRUE", "UNKNOWN", "FALSE"))
+      updateCheckboxGroupInput(inputId = "additional_filters",
+                               selected = c(""))
     })
 
     return(list(data_filtered = data_filtered,
-                data_sets = data_sets))
+                data_sets = data_sets,
+                HLA_typings = HLA_typings,
+                additional_filters = additional_filters,
+                UMI_count_min = UMI_count_min,
+                non_specific_UMI_count_min = non_specific_UMI_count_min
+                ))
 })
 }
 
