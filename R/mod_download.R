@@ -20,42 +20,37 @@ mod_download_ui <- function(id){
 #' download Server Functions
 #'
 #' @noRd
-mod_download_server <- function(id, data_filtered){
+mod_download_server <- function(id, data_filtered, data_sets, HLA_typings,
+                                UMI_count_min, non_specific_UMI_count_min,
+                                additional_filters){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
     output$downloadData <- downloadHandler(
-      filename = paste('TCRSequences-', Sys.Date(), '.zip', sep=''),
+      filename = stringr::str_c('TCRSequences-', Sys.Date(), '.zip'),
       content = function(fname) {
 
-        data_filtered_name <- paste('data_filtered',
+        data_filtered_name <- stringr::str_c('data_filtered',
                                     Sys.Date(),
-                                    '.csv',
-                                    sep = '')
-        meta_data_name <- paste('meta_data',
+                                    '.csv')
+        meta_data_name <- stringr::str_c('meta_data',
                                 Sys.Date(),
-                                '.csv',
-                                sep = '')
+                                '.csv')
 
-        write.csv(data_filtered(),
-                  file = data_filtered_name,
-                  row.names=FALSE)
+        #write.csv(data_filtered(),
+        #          file = data_filtered_name,
+        #          row.names=FALSE)
         write.csv(tibble::tribble(~variable, ~value,
-                                  "Data sets", "A0201",
-                                  "HLA-typings", "asd",
-                                  "Min. UMI-count", "asd",
-                                  "Non-specific binder multiplier", "asd",
-                                  "Additional filters", "asd"),
+                                  "Data sets", data_sets(),
+                                  "HLA-typings", HLA_typings(),
+                                  "Min. UMI-count", stringr::str_c(UMI_count_min()),
+                                  "Non-specific binder multiplier", stringr::str_c(non_specific_UMI_count_min()),
+                                  "Additional filters", additional_filters()) %>%
+                    tidyr::unnest(cols = value),
                   file = meta_data_name,
                   row.names=FALSE)
-
-        zip(zipfile = fname,
-            files = c(data_filtered_name, meta_data_name))
-        browser()
-      },
-      contentType = "application/zip"
+      }
     )
-
   })
 }
 

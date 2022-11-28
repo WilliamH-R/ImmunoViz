@@ -11,6 +11,10 @@ app_server <- function(input, output, session) {
 
   data_filtered <- mod_filter_data_set_server("filter_data_set_1")[[1]]
   data_sets <- mod_filter_data_set_server("filter_data_set_1")[[2]]
+  HLA_typings <- mod_filter_data_set_server("filter_data_set_1")[[3]]
+  additional_filters = mod_filter_data_set_server("filter_data_set_1")[[4]]
+  UMI_count_min = mod_filter_data_set_server("filter_data_set_1")[[5]]
+  non_specific_UMI_count_min = mod_filter_data_set_server("filter_data_set_1")[[6]]
   mod_summarise_data_server("summarise_data_1",
                             data_filtered = data_filtered,
                             data_sets = data_sets)
@@ -24,6 +28,11 @@ app_server <- function(input, output, session) {
                                   data_filtered = data_filtered)
   mod_print_output_server("print_output_1")
   mod_download_server("download_1",
-                      data_filtered = data_filtered)
+                      data_filtered = data_filtered,
+                      data_sets = data_sets,
+                      HLA_typings = HLA_typings,
+                      additional_filters = additional_filters,
+                      UMI_count_min = UMI_count_min,
+                      non_specific_UMI_count_min = non_specific_UMI_count_min)
   mod_readme_server("readme_1")
 }
