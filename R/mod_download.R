@@ -21,7 +21,7 @@ mod_download_ui <- function(id){
 #'
 #' @noRd
 mod_download_server <- function(id, data_filtered, data_sets, HLA_typings,
-                                UMI_count_min, non_specific_UMI_count_min,
+                                UMI_count_min, negative_control_UMI_count_min,
                                 additional_filters){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
@@ -44,7 +44,7 @@ mod_download_server <- function(id, data_filtered, data_sets, HLA_typings,
                                   "Data sets", data_sets(),
                                   "HLA-typings", HLA_typings(),
                                   "Min. UMI-count", stringr::str_c(UMI_count_min()),
-                                  "Non-specific binder multiplier", stringr::str_c(non_specific_UMI_count_min()),
+                                  "Non-specific binder multiplier", stringr::str_c(negative_control_UMI_count_min()),
                                   "Additional filters", additional_filters()) %>%
                     tidyr::unnest(cols = value),
                   file = meta_data_name,

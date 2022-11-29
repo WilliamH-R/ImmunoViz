@@ -26,7 +26,7 @@ mod_print_output_ui <- function(id){
 #' print_output Server Functions
 #'
 #' @noRd
-mod_print_output_server <- function(id, UMI_count_min, non_specific_UMI_count_min){
+mod_print_output_server <- function(id, UMI_count_min, negative_control_UMI_count_min){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 

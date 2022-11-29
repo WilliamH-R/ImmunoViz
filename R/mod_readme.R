@@ -28,7 +28,8 @@ mod_readme_ui <- function(id){
     p("The HLA-matching is done by matching the data with with typings given in
       the article from 10x Genomics from which these data sets come from. The
       table are as shown:"),
-    tableOutput(outputId = ns("HLA_table"))
+    tableOutput(outputId = ns("HLA_table")),
+    h6("ND = Not determined / Not detected")
   )
 }
 

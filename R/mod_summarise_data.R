@@ -32,11 +32,8 @@ mod_summarise_data_server <- function(id, data_filtered, data_sets){
     ns <- session$ns
 
     output$summarise_table <- renderTable(
-      TCRSequenceFunctions::data_combined_tidy %>%
-        dplyr::filter(donor %in% data_sets()) %>%
-        TCRSequenceFunctions::summarise_with_filter(.data_new = data_filtered(),
-                                                    summarise_by = input$summarise_by,
-                                                    identifier = barcode))
+      data_filtered() %>%
+        TCRSequenceFunctions::summarise_with_filter(summarise_by = input$summarise_by))
 
   })
 }

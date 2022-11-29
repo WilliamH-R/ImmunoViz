@@ -14,12 +14,16 @@ app_server <- function(input, output, session) {
   HLA_typings <- mod_filter_data_set_server("filter_data_set_1")[[3]]
   additional_filters = mod_filter_data_set_server("filter_data_set_1")[[4]]
   UMI_count_min = mod_filter_data_set_server("filter_data_set_1")[[5]]
-  non_specific_UMI_count_min = mod_filter_data_set_server("filter_data_set_1")[[6]]
+  negative_control_UMI_count_min = mod_filter_data_set_server("filter_data_set_1")[[6]]
+  mod_count_rows_server("count_rows_1",
+                        data_filtered = data_filtered)
   mod_summarise_data_server("summarise_data_1",
                             data_filtered = data_filtered,
                             data_sets = data_sets)
   mod_plot_relevant_binder_frequencies_server("plot_relevant_binder_frequencies_1",
                                               data_filtered = data_filtered)
+  mod_plot_umap_server("plot_umap_1",
+                       data_filtered = data_filtered)
   mod_alpha_beta_distribution_server("alpha_beta_distribution_1",
                                      data_filtered = data_filtered)
   mod_alpha_beta_distinctiveness_server("alpha_beta_distinctiveness_1",
@@ -33,6 +37,6 @@ app_server <- function(input, output, session) {
                       HLA_typings = HLA_typings,
                       additional_filters = additional_filters,
                       UMI_count_min = UMI_count_min,
-                      non_specific_UMI_count_min = non_specific_UMI_count_min)
+                      negative_control_UMI_count_min = negative_control_UMI_count_min)
   mod_readme_server("readme_1")
 }

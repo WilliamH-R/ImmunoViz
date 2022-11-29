@@ -30,7 +30,8 @@ mod_filter_data_set_ui <- function(id){
                          label = "Additional filters",
                          choices = c("Include only non-promiscuous pairs" = "only_non_promiscuous",
                                      "Remove unique TCR-pMHC matches" = "exclude_unique",
-                                     "Choose UMI-count thresholds" = "UMI_thresholds")
+                                     "Choose UMI-count thresholds" = "UMI_thresholds",
+                                     "Only binding events evaluated to TRUE (Note: will only affect some output)" = "is_binder")
                          ),
       conditionalPanel(
         condition = "input.additional_filters.indexOf('UMI_thresholds') != -1",
@@ -44,7 +45,7 @@ mod_filter_data_set_ui <- function(id){
           step = 1
         ),
         sliderInput(
-          inputId = ns("non_specific_UMI_count_min"),
+          inputId = ns("negative_control_UMI_count_min"),
           label = "Threshold for UMI-count of non-specific binders",
           min = 0,
           max = 50,
@@ -81,8 +82,9 @@ mod_filter_data_set_server <- function(id){
                                                      HLA_match %in% input$HLA_typings) %>%
                                        {if ("only_non_promiscuous" %in% input$additional_filters) tidyr::drop_na(., non_promiscuous_pair) else .} %>%
                                        {if ("exclude_unique" %in% input$additional_filters) dplyr::filter(., unique_binder == FALSE) else .} %>%
+                                       {if ("is_binder" %in% input$additional_filters) dplyr::filter(., is_binder == TRUE) else .} %>%
                                        {if ("UMI_thresholds" %in% input$additional_filters) TCRSequenceFunctions::evaluate_binder(., UMI_count_min = input$UMI_count_min,
-                                                                                                                                  non_specific_UMI_count_min = input$non_specific_UMI_count_min) else .}
+                                                                                                                                  negative_control_UMI_count_min = input$negative_control_UMI_count_min) else .}
     })
 
     data_sets <- eventReactive(input$update_data,
@@ -105,15 +107,15 @@ mod_filter_data_set_server <- function(id){
                                      input$UMI_count_min
                                      })
 
-    non_specific_UMI_count_min <- eventReactive(input$update_data,
+    negative_control_UMI_count_min <- eventReactive(input$update_data,
                                                 ignoreNULL = FALSE, {
-                                                  input$non_specific_UMI_count_min
+                                                  input$negative_control_UMI_count_min
                                                   })
 
     observeEvent(input$reset_filters, {
       updateSliderInput(inputId = "UMI_count_min",
                         value = 10)
-      updateSliderInput(inputId = "non_specific_UMI_count_min",
+      updateSliderInput(inputId = "negative_control_UMI_count_min",
                         value = 5)
       updateCheckboxGroupInput(inputId = "data_sets",
                                selected = c("donor1", "donor2",
@@ -129,7 +131,7 @@ mod_filter_data_set_server <- function(id){
                 HLA_typings = HLA_typings,
                 additional_filters = additional_filters,
                 UMI_count_min = UMI_count_min,
-                non_specific_UMI_count_min = non_specific_UMI_count_min
+                negative_control_UMI_count_min = negative_control_UMI_count_min
                 ))
 })
 }

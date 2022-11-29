@@ -22,6 +22,8 @@ app_ui <- function(request) {
             title = h4("Choose data set and settings"),
             mod_filter_data_set_ui("filter_data_set_1"),
             hr(),
+            mod_count_rows_ui("count_rows_1"),
+            hr(),
             h4("Download data with the filters applied from above"),
             mod_download_ui("download_1")
           )),
@@ -46,7 +48,9 @@ app_ui <- function(request) {
                    h3("Check binding events between pMHC and non-promiscuous
                       TCR-sequences along with concordance and within-TCR barcode
                       count"),
-                   mod_plot_relevant_binder_frequencies_ui("plot_relevant_binder_frequencies_1")
+                   mod_plot_relevant_binder_frequencies_ui("plot_relevant_binder_frequencies_1"),
+                   h3("Umap of all protein expression levels"),
+                   mod_plot_umap_ui("plot_umap_1")
                    ),
           tabPanel(title = "readme",
                    mod_readme_ui("readme_1")
