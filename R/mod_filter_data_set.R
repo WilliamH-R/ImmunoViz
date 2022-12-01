@@ -30,8 +30,8 @@ mod_filter_data_set_ui <- function(id){
                          label = "Additional filters",
                          choices = c("Include only non-promiscuous pairs" = "only_non_promiscuous",
                                      "Remove unique TCR-pMHC matches" = "exclude_unique",
-                                     "Choose UMI-count thresholds" = "UMI_thresholds",
-                                     "Only binding events evaluated to TRUE (Note: will only affect some output)" = "is_binder")
+                                     "Only binding events evaluated to TRUE (Note: will only affect some output)" = "is_binder",
+                                     "Choose UMI-count thresholds" = "UMI_thresholds")
                          ),
       conditionalPanel(
         condition = "input.additional_filters.indexOf('UMI_thresholds') != -1",
@@ -46,7 +46,7 @@ mod_filter_data_set_ui <- function(id){
         ),
         sliderInput(
           inputId = ns("negative_control_UMI_count_min"),
-          label = "Threshold for UMI-count of non-specific binders",
+          label = "Multiplication factor for threshold for UMI-count of negative controls",
           min = 0,
           max = 50,
           value = 5,
@@ -83,7 +83,8 @@ mod_filter_data_set_server <- function(id){
                                        {if ("only_non_promiscuous" %in% input$additional_filters) tidyr::drop_na(., non_promiscuous_pair) else .} %>%
                                        {if ("exclude_unique" %in% input$additional_filters) dplyr::filter(., unique_binder == FALSE) else .} %>%
                                        {if ("is_binder" %in% input$additional_filters) dplyr::filter(., is_binder == TRUE) else .} %>%
-                                       {if ("UMI_thresholds" %in% input$additional_filters) TCRSequenceFunctions::evaluate_binder(., UMI_count_min = input$UMI_count_min,
+                                       {if ("UMI_thresholds" %in% input$additional_filters) TCRSequenceFunctions::evaluate_binder(.,
+                                                                                                                                  UMI_count_min = input$UMI_count_min,
                                                                                                                                   negative_control_UMI_count_min = input$negative_control_UMI_count_min) else .}
     })
 
@@ -123,7 +124,7 @@ mod_filter_data_set_server <- function(id){
       updateCheckboxGroupInput(inputId = "HLA_typings",
                                selected = c("TRUE", "UNKNOWN", "FALSE"))
       updateCheckboxGroupInput(inputId = "additional_filters",
-                               selected = c(""))
+                               selected = c("UMI_thresholds"))
     })
 
     return(list(data_filtered = data_filtered,
