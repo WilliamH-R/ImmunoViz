@@ -41,7 +41,9 @@ app_ui <- function(request) {
                    hr(),
                    mod_alpha_beta_distribution_ui("alpha_beta_distribution_1"),
                    hr(),
-                   mod_plot_count_pr_allele_ui("plot_count_pr_allele_1")
+                   mod_plot_count_pr_allele_ui("plot_count_pr_allele_1"),
+                   hr(),
+                   mod_boxplot_protein_expression_ui("boxplot_protein_expression_1")
                    ),
           tabPanel(title = "Data exploration",
                    br(),

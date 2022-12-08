@@ -30,6 +30,8 @@ app_server <- function(input, output, session) {
                                         data_filtered = data_filtered)
   mod_plot_count_pr_allele_server("plot_count_pr_allele_1",
                                   data_filtered = data_filtered)
+  mod_boxplot_protein_expression_server("boxplot_protein_expression_1",
+                                        data_filtered = data_filtered)
   mod_print_output_server("print_output_1")
   mod_download_server("download_1",
                       data_filtered = data_filtered,
