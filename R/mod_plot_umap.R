@@ -20,19 +20,6 @@ mod_plot_umap_ui <- function(id){
       selected = "CD45RA",
       multiple = FALSE
     ),
-
-    # varSelectInput(inputId = ns("color"),
-    #                label = "Variable:",
-    #                data = TCRSequenceFunctions::data_combined_tidy %>%
-    #                         dplyr::select(dplyr::matches("CD|Ig|HLA-DR"))),
-      sliderInput(
-        inputId = ns("frac_include"),
-        label = "Fractions of rows to include in modelling:",
-        min = 0,
-        max = 1,
-        value = 0.2,
-        step = 0.1
-      ),
     plotOutput(outputId = ns("umap_plot"))
 
   )
@@ -45,13 +32,9 @@ mod_plot_umap_server <- function(id, data_filtered){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    # output$proteins <- data_filtered() %>%
-    #   dplyr::select(dplyr::matches("CD|Ig|HLA-DR"))
-
     output$umap_plot <- renderPlot(
       data_filtered() %>%
-        TCRSequenceFunctions::umap_of_protein_expressions(color_by = input$color,
-                                                          frac_include = input$frac_include),
+        TCRSequenceFunctions::umap_of_protein_expressions(color_by = input$color),
       res = 125
     )
 
