@@ -22,7 +22,7 @@ app_ui <- function(request) {
             title = h4("Choose data set and settings"),
             mod_filter_data_set_ui("filter_data_set_1"),
             hr(),
-            mod_count_rows_ui("count_rows_1"),
+            mod_show_percentage_left_ui("show_percentage_left_1"),
             hr(),
             h4("Download data with the filters applied from above"),
             mod_download_ui("download_1")

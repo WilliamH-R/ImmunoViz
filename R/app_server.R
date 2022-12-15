@@ -15,8 +15,8 @@ app_server <- function(input, output, session) {
   additional_filters = mod_filter_data_set_server("filter_data_set_1")[[4]]
   UMI_count_min = mod_filter_data_set_server("filter_data_set_1")[[5]]
   negative_control_UMI_count_min = mod_filter_data_set_server("filter_data_set_1")[[6]]
-  mod_count_rows_server("count_rows_1",
-                        data_filtered = data_filtered)
+  mod_show_percentage_left_server("show_percentage_left_1",
+                                  data_filtered = data_filtered)
   mod_summarise_data_server("summarise_data_1",
                             data_filtered = data_filtered,
                             data_sets = data_sets)
