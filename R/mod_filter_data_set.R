@@ -29,7 +29,7 @@ mod_filter_data_set_ui <- function(id){
       checkboxGroupInput(inputId = ns("additional_filters"),
                          label = "Additional filters",
                          choices = c("Include only non-promiscuous pairs" = "only_non_promiscuous",
-                                     "Remove uniquly observed TCR-pMHC matches" = "exclude_unique",
+                                     "Remove uniquely observed TCR-pMHC matches" = "exclude_unique",
                                      "Only binding events evaluated to TRUE (Note: will only affect some output)" = "is_binder",
                                      "Choose UMI-count thresholds" = "UMI_thresholds")
                          ),
