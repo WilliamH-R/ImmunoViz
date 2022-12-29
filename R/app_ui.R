@@ -48,8 +48,7 @@ app_ui <- function(request) {
           tabPanel(title = "Data Exploration",
                    br(),
                    h3("Check binding events between pMHC and non-promiscuous
-                      TCR-sequences along with concordance and within-TCR barcode
-                      count"),
+                      TCR-sequences"),
                    mod_plot_relevant_binder_frequencies_ui("plot_relevant_binder_frequencies_1"),
                    h3("Umap of all protein expression levels"),
                    mod_plot_umap_ui("plot_umap_1")
