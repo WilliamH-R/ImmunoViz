@@ -1,4 +1,4 @@
-#' alpha_beta_distinctiveness UI Function
+#' alpha_beta_sequence_distinctiveness UI Function
 #'
 #' @description A shiny Module.
 #'
@@ -7,7 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_alpha_beta_distinctiveness_ui <- function(id){
+mod_alpha_beta_sequence_distinctiveness_ui <- function(id){
   ns <- NS(id)
   tagList(
 
@@ -16,16 +16,16 @@ mod_alpha_beta_distinctiveness_ui <- function(id){
   )
 }
 
-#' alpha_beta_distinctiveness Server Functions
+#' alpha_beta_sequence_distinctiveness Server Functions
 #'
 #' @noRd
-mod_alpha_beta_distinctiveness_server <- function(id, data_filtered){
+mod_alpha_beta_sequence_distinctiveness_server <- function(id, data_filtered){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
     output$distinctiveness_plot <- renderPlot(
       data_filtered() %>%
-        TCRSequenceFunctions::alpha_beta_distinctiveness(),
+        TCRSequenceFunctions::alpha_beta_sequence_distinctiveness(),
       res = 125
     )
 
@@ -33,7 +33,7 @@ mod_alpha_beta_distinctiveness_server <- function(id, data_filtered){
 }
 
 ## To be copied in the UI
-# mod_alpha_beta_distinctiveness_ui("alpha_beta_distinctiveness_1")
+# mod_alpha_beta_sequence_distinctiveness_ui("alpha_beta_sequence_distinctiveness_1")
 
 ## To be copied in the server
-# mod_alpha_beta_distinctiveness_server("alpha_beta_distinctiveness_1")
+# mod_alpha_beta_sequence_distinctiveness_server("alpha_beta_sequence_distinctiveness_1")

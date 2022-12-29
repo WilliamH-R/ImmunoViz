@@ -20,13 +20,13 @@ app_server <- function(input, output, session) {
   mod_summarise_data_server("summarise_data_1",
                             data_filtered = data_filtered,
                             data_sets = data_sets)
-  mod_plot_relevant_binder_frequencies_server("plot_relevant_binder_frequencies_1",
+  mod_plot_relevant_binders_plot_server("plot_relevant_binders_plot_1",
                                               data_filtered = data_filtered)
   mod_plot_umap_server("plot_umap_1",
                        data_filtered = data_filtered)
-  mod_alpha_beta_distribution_server("alpha_beta_distribution_1",
+  mod_alpha_beta_category_distribution_server("alpha_beta_category_distribution_1",
                                      data_filtered = data_filtered)
-  mod_alpha_beta_distinctiveness_server("alpha_beta_distinctiveness_1",
+  mod_alpha_beta_sequence_distinctiveness_server("alpha_beta_sequence_distinctiveness_1",
                                         data_filtered = data_filtered)
   mod_plot_count_pr_allele_server("plot_count_pr_allele_1",
                                   data_filtered = data_filtered)

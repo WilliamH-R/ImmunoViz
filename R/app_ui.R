@@ -39,9 +39,9 @@ app_ui <- function(request) {
                    ),
           tabPanel(title = "Data Check",
                    h3("Check distributions of the loaded data set"),
-                   mod_alpha_beta_distinctiveness_ui("alpha_beta_distinctiveness_1"),
+                   mod_alpha_beta_sequence_distinctiveness_ui("alpha_beta_sequence_distinctiveness_1"),
                    hr(),
-                   mod_alpha_beta_distribution_ui("alpha_beta_distribution_1"),
+                   mod_alpha_beta_category_distribution_ui("alpha_beta_category_distribution_1"),
                    hr(),
                    mod_plot_count_pr_allele_ui("plot_count_pr_allele_1")
                    ),
@@ -49,7 +49,7 @@ app_ui <- function(request) {
                    br(),
                    h3("Check binding events between pMHC and non-promiscuous
                       TCR-sequences"),
-                   mod_plot_relevant_binder_frequencies_ui("plot_relevant_binder_frequencies_1"),
+                   mod_plot_relevant_binders_plot_ui("plot_relevant_binders_plot_1"),
                    h3("Umap of all protein expression levels"),
                    mod_plot_umap_ui("plot_umap_1")
                    ),
