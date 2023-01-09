@@ -1,4 +1,4 @@
-#' alpha_beta_distribution UI Function
+#' alpha_beta_category_distribution UI Function
 #'
 #' @description A shiny Module.
 #'
@@ -7,7 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_alpha_beta_distribution_ui <- function(id){
+mod_alpha_beta_category_distribution_ui <- function(id){
   ns <- NS(id)
   tagList(
 
@@ -16,16 +16,16 @@ mod_alpha_beta_distribution_ui <- function(id){
     )
 }
 
-#' alpha_beta_distribution Server Functions
+#' alpha_beta_category_distribution Server Functions
 #'
 #' @noRd
-mod_alpha_beta_distribution_server <- function(id, data_filtered){
+mod_alpha_beta_category_distribution_server <- function(id, data_filtered){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
     output$distribution_plot <- renderPlot(
       data_filtered() %>%
-        TCRSequenceFunctions::alpha_beta_pair_distribution(),
+        TCRSequenceFunctions::alpha_beta_category_distribution(),
       res = 125
     )
 
@@ -33,7 +33,7 @@ mod_alpha_beta_distribution_server <- function(id, data_filtered){
 }
 
 ## To be copied in the UI
-# mod_alpha_beta_distribution_ui("alpha_beta_distribution_1")
+# mod_alpha_beta_category_distribution_ui("alpha_beta_category_distribution_1")
 
 ## To be copied in the server
-# mod_alpha_beta_distribution_server("alpha_beta_distribution_1")
+# mod_alpha_beta_category_distribution_server("alpha_beta_category_distribution_1")

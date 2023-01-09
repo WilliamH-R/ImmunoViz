@@ -29,9 +29,8 @@ mod_filter_data_set_ui <- function(id){
       checkboxGroupInput(inputId = ns("additional_filters"),
                          label = "Additional filters",
                          choices = c("Include only non-promiscuous pairs" = "only_non_promiscuous",
-                                     "Remove uniquly observed TCR-pMHC matches" = "exclude_unique",
-                                     "Only binding events evaluated to TRUE (Note: will only affect some output)" = "is_binder",
-                                     "Choose UMI-count thresholds" = "UMI_thresholds")
+                                     "Remove uniquely observed TCR-pMHC matches" = "exclude_unique",
+                                     "Choose UMI-count thresholds (Note: will increase computational time)" = "UMI_thresholds")
                          ),
       conditionalPanel(
         condition = "input.additional_filters.indexOf('UMI_thresholds') != -1",
@@ -74,7 +73,7 @@ mod_filter_data_set_server <- function(id){
 
                                      validate(
                                        need(input$data_sets != "", "Please choose at least one donor"),
-                                       need(input$HLA_typings != "", "Please choose at least one type of HLA-status")
+                                       need(input$HLA_typings != "", "Please choose at least one type of HLA-match")
                                      )
 
                                      TCRSequenceFunctions::data_combined_tidy %>%
@@ -82,10 +81,10 @@ mod_filter_data_set_server <- function(id){
                                                      HLA_match %in% input$HLA_typings) %>%
                                        {if ("only_non_promiscuous" %in% input$additional_filters) tidyr::drop_na(., non_promiscuous_pair) else .} %>%
                                        {if ("exclude_unique" %in% input$additional_filters) dplyr::filter(., unique_binder == FALSE) else .} %>%
-                                       {if ("is_binder" %in% input$additional_filters) dplyr::filter(., is_binder == TRUE) else .} %>%
                                        {if ("UMI_thresholds" %in% input$additional_filters) TCRSequenceFunctions::evaluate_binder(.,
                                                                                                                                   UMI_count_min = input$UMI_count_min,
-                                                                                                                                  negative_control_UMI_count_min = input$negative_control_UMI_count_min) else .}
+                                                                                                                                  negative_control_UMI_count_min = input$negative_control_UMI_count_min) else .} %>%
+                                       dplyr::filter(is_binder == TRUE)
     })
 
     data_sets <- eventReactive(input$update_data,

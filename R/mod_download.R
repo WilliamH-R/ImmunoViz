@@ -37,9 +37,9 @@ mod_download_server <- function(id, data_filtered, data_sets, HLA_typings,
                                 Sys.Date(),
                                 '.csv')
 
-        #write.csv(data_filtered(),
-        #          file = data_filtered_name,
-        #          row.names=FALSE)
+        write.csv(data_filtered(),
+                  file = data_filtered_name,
+                  row.names=FALSE)
         write.csv(tibble::tribble(~variable, ~value,
                                   "Data sets", data_sets(),
                                   "HLA-typings", HLA_typings(),
