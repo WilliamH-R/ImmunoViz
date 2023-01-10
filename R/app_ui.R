@@ -53,7 +53,7 @@ app_ui <- function(request) {
                    h3("Umap of all protein expression levels"),
                    mod_plot_umap_ui("plot_umap_1")
                    ),
-          tabPanel(title = "readme",
+          tabPanel(title = "README",
                    mod_readme_ui("readme_1")
                    )
           )
