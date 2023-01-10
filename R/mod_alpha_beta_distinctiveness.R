@@ -25,7 +25,7 @@ mod_alpha_beta_sequence_distinctiveness_server <- function(id, data_filtered){
 
     output$distinctiveness_plot <- renderPlot(
       data_filtered() %>%
-        TCRSequenceFunctions::alpha_beta_sequence_distinctiveness(),
+        ImmunoCleaner::alpha_beta_sequence_distinctiveness(),
       res = 125
     )
 

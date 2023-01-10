@@ -1,11 +1,11 @@
-name: TCRSequenceShiny
-title: TCRSequenceShiny
+name: ImmunoViz
+title: ImmunoViz
 username:
 account: ecvuwk-william-hagedorn0rasmussen
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 7294895
 bundleId: 6475326
-url: https://williamhr.shinyapps.io/TCRSequenceShiny/
+url: https://williamhr.shinyapps.io/ImmunoViz/
 when: 1667567406.19859
 lastSyncTime: 1667567406.19859

@@ -18,7 +18,7 @@
 attachment::att_amend_desc()
 
 ## Increase memory size
-rsconnect::configureApp("TCRSequenceShiny", size="large")
+rsconnect::configureApp("ImmunoViz", size="large")
 
 ## Add modules ----
 ## Create a module infrastructure in R/

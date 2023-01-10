@@ -34,7 +34,7 @@ mod_boxplot_protein_expression_server <- function(id, data_filtered){
 
     output$expression_boxplot <- renderPlot(
       data_filtered() %>%
-        TCRSequenceFunctions::boxplot_protein_expressions(plot_protein = input$protein),
+        ImmunoCleaner::boxplot_protein_expressions(plot_protein = input$protein),
       res = 125
     )
 

@@ -25,7 +25,7 @@ mod_show_percentage_left_server <- function(id, data_filtered){
 
     output$percentage_table <- renderTable(
       data_filtered() %>%
-        TCRSequenceFunctions::percentage_rows_kept())
+        ImmunoCleaner::percentage_rows_kept())
 
   })
 }

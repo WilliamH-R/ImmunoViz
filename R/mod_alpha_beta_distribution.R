@@ -25,7 +25,7 @@ mod_alpha_beta_category_distribution_server <- function(id, data_filtered){
 
     output$distribution_plot <- renderPlot(
       data_filtered() %>%
-        TCRSequenceFunctions::alpha_beta_category_distribution(),
+        ImmunoCleaner::alpha_beta_category_distribution(),
       res = 125
     )
 

@@ -19,7 +19,7 @@ options(shiny.launch.browser = .rs.invokeShinyWindowViewer)
 run_app()
 
 # Link to online app
-# https://williamhr.shinyapps.io/TCRSequenceShiny/
+# https://williamhr.shinyapps.io/ImmunoViz/
 
 # Link to pass objects between modules
 # https://jiwanheo.rbind.io/post/2022-02-06-pass-around-data-between-shiny-modules-with-r6/

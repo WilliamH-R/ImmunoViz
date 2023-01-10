@@ -25,7 +25,7 @@ mod_plot_count_pr_allele_server <- function(id, data_filtered){
 
     output$count_plot <- renderPlot(
       data_filtered() %>%
-        TCRSequenceFunctions::count_binding_pr_allele(),
+        ImmunoCleaner::count_binding_pr_allele(),
       res = 125
     )
 

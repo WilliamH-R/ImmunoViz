@@ -33,7 +33,7 @@ mod_summarise_data_server <- function(id, data_filtered, data_sets){
 
     output$summarise_table <- renderTable(
       data_filtered() %>%
-        TCRSequenceFunctions::summarise_with_filter(summarise_by = input$summarise_by))
+        ImmunoCleaner::summarise_with_filter(summarise_by = input$summarise_by))
 
   })
 }

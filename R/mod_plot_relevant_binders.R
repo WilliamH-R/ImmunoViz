@@ -34,7 +34,7 @@ mod_plot_relevant_binders_plot_server <- function(id, data_filtered){
 
     output$frequency_plot <- plotly::renderPlotly(
       data_filtered() %>%
-        TCRSequenceFunctions::relevant_binders_plot(identifier = barcode,
+        ImmunoCleaner::relevant_binders_plot(identifier = barcode,
                                                     max_frequency = input$max_frequency)
     )
 

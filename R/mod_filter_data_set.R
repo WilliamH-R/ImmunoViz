@@ -76,12 +76,12 @@ mod_filter_data_set_server <- function(id){
                                        need(input$HLA_typings != "", "Please choose at least one type of HLA-match")
                                      )
 
-                                     TCRSequenceFunctions::data_combined_tidy %>%
+                                     ImmunoCleaner::data_combined_tidy %>%
                                        dplyr::filter(donor %in% input$data_sets,
                                                      HLA_match %in% input$HLA_typings) %>%
                                        {if ("only_non_promiscuous" %in% input$additional_filters) tidyr::drop_na(., non_promiscuous_pair) else .} %>%
                                        {if ("exclude_unique" %in% input$additional_filters) dplyr::filter(., unique_binder == FALSE) else .} %>%
-                                       {if ("UMI_thresholds" %in% input$additional_filters) TCRSequenceFunctions::evaluate_binder(.,
+                                       {if ("UMI_thresholds" %in% input$additional_filters) ImmunoCleaner::evaluate_binder(.,
                                                                                                                                   UMI_count_min = input$UMI_count_min,
                                                                                                                                   negative_control_UMI_count_min = input$negative_control_UMI_count_min) else .} %>%
                                        dplyr::filter(is_binder == TRUE)

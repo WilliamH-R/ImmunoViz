@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# TCRSequenceShiny
+# ImmunoViz
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -10,8 +10,8 @@
 
 Contains the Shiny framework around the functions for handling a large
 database of TCR sequences. The package containing the functions is
-called `TCRSequenceFunctions` and can be found
-[here](https://github.com/WilliamH-R/TCRSequenceFunctions). Information
+called `ImmunoCleaner` and can be found
+[here](https://github.com/WilliamH-R/ImmunoCleaner). Information
 regarding the included functions and available data sets are also
 located in the package.
 
@@ -31,11 +31,11 @@ second tab is focused on exploration of the data.
 The Shiny App can be run directly from the terminal by:
 
 ``` r
-shiny::runGitHub(repo = "WilliamH-R/TCRSequenceShiny)
+shiny::runGitHub(repo = "WilliamH-R/ImmunoViz)
 ```
 
 Or downloaded from GitHub:
 
 ``` r
-devtools::install_github("WilliamH-R/TCRSequenceFunctions")
+devtools::install_github("WilliamH-R/ImmunoCleaner")
 ```

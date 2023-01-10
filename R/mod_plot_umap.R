@@ -34,7 +34,7 @@ mod_plot_umap_server <- function(id, data_filtered){
 
     output$umap_plot <- renderPlot(
       data_filtered() %>%
-        TCRSequenceFunctions::umap_of_protein_expressions(color_by = input$color),
+        ImmunoCleaner::umap_of_protein_expressions(color_by = input$color),
       res = 125
     )
 

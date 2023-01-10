@@ -40,7 +40,7 @@ mod_readme_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
-    output$HLA_table <- renderTable(TCRSequenceFunctions::aux_alleles_status_each_donor)
+    output$HLA_table <- renderTable(ImmunoCleaner::aux_alleles_status_each_donor)
 
   })
 }
