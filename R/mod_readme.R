@@ -14,15 +14,14 @@ mod_readme_ui <- function(id){
     p("On the left hand side a side bar panel is shown. Here it is possible to
       select various filters. E.g. data from which donor(s) to use, which
       HLA-matches to include and a couple sliders. Whether or not an interaction
-      between a pMHC and TCR-sequence is evaluated to relevant depend on these
-      sliders. The default is set to the threshold chosen by 10x Genomics.
+      between a pMHC and TCR-sequence is evaluated to relevant depend on, e.g.,
+      these sliders. The default is set to the thresholds chosen by 10x Genomics.
       Updating these sliders will then re-evaluate whether or not a interaction
       is relevant, and thereby also which data points to include in the shown
-      plots and tables. Changing the tick boxes will also automatically update
-      the plots and tables. At the bottom of said side bar panel is a download
+      plots and tables. At the bottom of said side bar panel is a download
       button. This will allow the user to download the data file presently
       used for plotting and similar. I.e, it will download the data file with
-      applied filtering."),
+      applied filtering along with meta data about the applied filters."),
     hr(),
     h3("HLA-typings"),
     p("The HLA-matching is done by matching the data with with typings given in
