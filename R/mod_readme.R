@@ -20,7 +20,7 @@ mod_readme_ui <- function(id){
       is relevant, and thereby also which data points to include in the shown
       plots and tables. At the bottom of said side bar panel is a download
       button. This will allow the user to download the data file presently
-      used for plotting and similar. I.e, it will download the data file with
+      used for plotting and similar, i.e., it will download the data file with
       applied filtering along with meta data about the applied filters."),
     hr(),
     h3("HLA-typings"),
