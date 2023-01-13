@@ -1,6 +1,6 @@
 Package: ImmunoViz
 Title: ImmunoViz
-Version: 0.0.0.9000
+Version: 1.0
 Authors@R: 
     person("William", "Hagedorn-Rasmussen", , "s194545@dtu.dk", role = c("aut", "cre"))
 Description: Allow interactive filtering and visualisation to immuno data.
