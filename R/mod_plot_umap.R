@@ -14,9 +14,9 @@ mod_plot_umap_ui <- function(id){
     selectInput(
       inputId = ns("color"),
       label = "Protein expression to color by:",
-      choices = c("CD3", "CD19", "CD45RA", "CD4", "CD8a",
-                  "CD14", "CD45RO", "CD279_PD-1", "IgG1",
-                  "IgG2a", "IgG2b", "CD127", "CD197_CCR7","HLA-DR"),
+      choices = c("CD8a", "CD3", "CD45RA", "CD45RO",
+                  "CD197_CCR7", "CD279_PD-1", "HLA-DR",
+                  "CD127", "CD4", "CD14", "CD19"),
       selected = "CD45RA",
       multiple = FALSE
     ),
